@@ -5,7 +5,7 @@ from . models import Note
 
 class NoteSerializer(serializers.ModelSerializer):
     """[summary]
-    This converts all the data into JSON object
+    This converts all the data of Note model into JSON object
     """
     class Meta:
         model = Note
