@@ -8,7 +8,7 @@ class NoteList(generics.ListCreateAPIView):
     """
     Creates ListAPI which list all objects of the model Note
     """
-    queryset = Note.objects.all().order_by('-created', '-updated')
+    queryset = Note.objects.all().order_by('-created', '-modified')
     serializer_class = NoteSerializer
 
 

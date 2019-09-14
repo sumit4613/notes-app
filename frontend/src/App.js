@@ -2,37 +2,30 @@ import React, { Component } from 'react';
 import { Button, Container, Row, Col } from 'reactstrap';
 
 import ListNotes from './components/ListNotes';
-
-var notes_temp = [
-  {
-    'id': 1,
-    'title': 'This is react note data',
-    'content': 'This is the content',
-  },
-  {
-    'id': 2,
-    'title': 'This is second react note data',
-    'content': 'This is the content',
-  },
-  {
-    'id': 3,
-    'title': 'This is third react note data',
-    'content': 'This is the content',
-  },
-];
-
+import { fetchNotes, fetchNote, updateNote } from './api';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: notes_temp,
+      notes: [],
       current_note_id: 0,
-      is_creating: true
+      is_creating: true,
+      is_fetching: true
     }
     this.handleItemClick = this.handleItemClick.bind(this);
     this.handleAddNote = this.handleAddNote.bind(this);
+    this.getData = this.getData.bind(this);
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  async getData() {
+    let data = await fetchNotes();
+    this.setState({notes: data});
   }
 
   handleItemClick(id) {
